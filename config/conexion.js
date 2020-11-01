@@ -1,8 +1,10 @@
 // Libreria para trabajar bbdd MongoDb
 const mongoose = require('mongoose');
 
+const BBDD = require('./config');
+
 // Direccion BBDD en local
-mongoose.connect('mongodb://localhost:27017/hotel', (err, res) => {
+mongoose.connect(BBDD.db, (err, res) => {
     if (err) {
         return console.log(`Error al conectar BBDD: ${err}`);
     }
@@ -15,4 +17,9 @@ mongoose.connect('mongodb://localhost:27017/hotel', (err, res) => {
     useFindAndModify: false
 });
 
-module.exports = mongoose;
+
+
+module.exports = {
+    mongoose
+    //port
+};

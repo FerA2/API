@@ -9,14 +9,20 @@ const cors = require('cors');
 
 
 
+
+
 //  importamos rutas
 const indexRouter = require('./routes/index');
 const userRouter = require('./routes/usuario');
+const adminRouter = require('./routes/admin');
+const registro = require('./routes/registro');
+
 
 const app = express();
 
 // El puerto sera una variable de entorno PORT o en su defecto 3000
-const port = process.env.PORT || 3000;
+//const port = process.env.PORT || 3000;
+const config = require('./config/config');
 
 app.use(bodyParser.urlencoded({
     extended: false
@@ -29,7 +35,9 @@ app.use(cors());
 //Rutas
 app.use('/', indexRouter);
 app.use('/api', userRouter);
+app.use('/api', adminRouter);
+app.use('/api', registro);
 
-app.listen(port, () => {
-    console.log(`API REST http://localhost:${port}`);
+app.listen(config.port, () => {
+    console.log(`API REST http://localhost:${config.port}`);
 });

@@ -46,12 +46,16 @@ router.get('/usuario/:id', (req, res) => {
     });
 });
 
+
+// controlar error email duplicado
 // Post añadir usuario
 router.post('/usuario', (req, res) => {
     console.log(req.body);
     let usuario = new Usuario();
     usuario.name = req.body.name;
     usuario.telefono = req.body.telefono;
+    usuario.email = req.body.email;
+    usuario.password = req.body.password;
     usuario.categoria = req.body.categoria;
     // usuario es un objeto de mongoose por lo que podemos usar save
     usuario.save((err, usuarioStored) => {

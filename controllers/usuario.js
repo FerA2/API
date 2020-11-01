@@ -3,7 +3,9 @@
 const userRouter = require('./routes/usuario');
 app.use('/api', userRouter);
 const Usuario = require('../models/usuario');
-
+/*
+       Investigar dividir rutas en controlador + rutas
+*/
 // GET todos los usuarios */
 //Añadir permisos solo admin
 /*
