@@ -1,5 +1,3 @@
-// comprobar rutas autorizadas
-
 //const jwt = require('jwt-simple');
 //const config = require('../config/config');
 
@@ -7,26 +5,29 @@
 
 const services = require('../services/token');
 
-function isAdmin(req, res, next) {
+// Comprueba los tokens
+function isAuth(req, res, next) {
     // Comprueba en los header de la peticion
-    if (!req.headers.autorization) {
+    if (!req.headers.authorization) {
         return res.status(403).send({
             msg: ' No estas autorizado'
         });
     }
-    // extraemos el token de la cabecera
-    const token = req.headers.autorization.split(" ")[1];
+    // extraemos el token de la cabecera (Bearer 123123.asdasd<--token)
+    const token = req.headers.authorization.split(" ")[1];
     // Extraemos el cuerpo del token decodificado ---> movido al servicio token
     //const payload = jwt.decode(token, config.secreto);
-    // El sercicio es una promesa, cuando se resuelve continua la funcion
+    // El servicio es una promesa, cuando se resuelve continua la funcion
+    //console.log(token);
     services.descifrarToken(token)
         .then(respuesta => {
-            req.user = respuesta;
+            req.usuario = respuesta;
+            next();
         })
         .catch(respuesta => {
             res.status(respuesta.status);
         })
-    return req.user = payload.sub;
+    return req.usuario;
 }
 
-module.exports = isAdmin;
+module.exports = isAuth;

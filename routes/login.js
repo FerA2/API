@@ -1,4 +1,4 @@
-// Ruta Registro
+// Ruta Login
 const express = require('express');
 const router = express.Router();
 
@@ -6,12 +6,12 @@ const router = express.Router();
 const auth = require('../controllers/auth');
 
 // get
-router.get('/registro', (req, res) => {
+router.get('/login', (req, res) => {
     res.status(200).send({
-        msg: 'Registro'
+        msg: 'Login'
     });
 });
 // Consume el servicio de registro
-router.post('/registro', auth.registro);
+router.post('/login', auth.login);
 
 module.exports = router;

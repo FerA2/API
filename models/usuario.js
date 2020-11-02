@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-
+// Evita el error de email duplicado
+const uniqueValidator = require('mongoose-unique-validator');
 const Schema = mongoose.Schema;
 
 // encriptado de contraseña
@@ -12,13 +13,13 @@ const UsuarioSchema = Schema({
     // emails unicos en la base
     email: {
         type: String,
-        //unique: true,
+        unique: true,
         lowercase: true
     },
     // no puede ser devuelto el campo en un select
     password: {
         type: String,
-        select: false
+        //select: false
     },
     fechaAlta: {
         type: Date,
@@ -28,6 +29,9 @@ const UsuarioSchema = Schema({
         type: String,
         enum: ['cliente', 'admin']
     }
+});
+UsuarioSchema.plugin(uniqueValidator, {
+    msg: 'Error, email ya registrado'
 });
 
 // encripta la contraseña antes de guardarse https://www.npmjs.com/package/bcrypt

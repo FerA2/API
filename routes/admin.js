@@ -6,7 +6,7 @@ const router = express.Router();
 const auth = require('../middlewares/auth');
 
 // Ruta basica 
-router.get('/admin', auth, (req, res) => {
+router.post('/admin', auth, (req, res) => {
     res.status(200).send({
         msg: 'ADMIN API'
     });

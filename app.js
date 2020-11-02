@@ -7,15 +7,12 @@ const bodyParser = require('body-parser');
 // Middleware para evitar CORS
 const cors = require('cors');
 
-
-
-
-
 //  importamos rutas
 const indexRouter = require('./routes/index');
 const userRouter = require('./routes/usuario');
 const adminRouter = require('./routes/admin');
 const registro = require('./routes/registro');
+const login = require('./routes/login');
 
 
 const app = express();
@@ -37,6 +34,7 @@ app.use('/', indexRouter);
 app.use('/api', userRouter);
 app.use('/api', adminRouter);
 app.use('/api', registro);
+app.use('/Api', login);
 
 app.listen(config.port, () => {
     console.log(`API REST http://localhost:${config.port}`);
